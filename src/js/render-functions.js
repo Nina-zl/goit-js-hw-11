@@ -12,18 +12,8 @@ const lightbox = new SimpleLightbox('.gallery a', {
 const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
-export function createImageMarkup(images) {
-  return images
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => `
+export function createGallery(images) {
+  return images .map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
       <li class="gallery-item">
         <a class="gallery-link" href="${largeImageURL}">
           <img class="gallery-image" src="${webformatURL}" alt="${tags}" loading="lazy" />
@@ -39,9 +29,9 @@ export function createImageMarkup(images) {
     .join('');
 }
 
-export function updateGallery(images) {
+export function changegallery(images) {
   clearGallery();
-  gallery.innerHTML = createImageMarkup(images);
+  gallery.innerHTML = createGallery(images);
   lightbox.refresh();
 }
 
@@ -57,7 +47,7 @@ export function hideLoader() {
   loader.style.display = 'none';
 }
 
-export function showNoResultsMessage(message) {
+export function errorResult(message) {
   iziToast.error({
     title: 'Error',
     message: message,
